@@ -14,6 +14,6 @@ public record RegistroUsoRequest (
         EquipoEntity idEquipo,
         LocalDate fecha,
         LocalTime horaInicio,
-        LocalTime horagFin,
+        LocalTime horaFin,
         String novedades
 ){}
