@@ -1,4 +1,4 @@
-package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.entity;
+package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

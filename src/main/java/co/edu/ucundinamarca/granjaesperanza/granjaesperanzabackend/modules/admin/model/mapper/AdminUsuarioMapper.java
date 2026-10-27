@@ -1,8 +1,8 @@
-package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.mapper;
+package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.mapper;
 
-import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.dto.AdminUsuarioRequest;
-import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.dto.AdminUsuarioResponse;
-import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.entity.AdminUsuarioEntity;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.dto.AdminUsuarioRequest;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.dto.AdminUsuarioResponse;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.entity.AdminUsuarioEntity;
 import org.springframework.stereotype.Component;
 
 @Component

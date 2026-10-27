@@ -24,4 +24,7 @@ public class TrabajadorEntity {
 
     @Column(name = "cedula", nullable = false, length = 20, unique = true)
     private String cedula;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
 }

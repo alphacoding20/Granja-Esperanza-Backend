@@ -22,4 +22,7 @@ public class CategoriaEntity {
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
 }

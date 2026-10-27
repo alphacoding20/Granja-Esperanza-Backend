@@ -16,6 +16,7 @@ public class TrabajadorMapper {
         TrabajadorEntity entity = new TrabajadorEntity();
         entity.setNombre(request.nombre());
         entity.setCedula(request.cedula());
+        entity.setActivo(request.activo());
 
         return entity;
     }
@@ -28,7 +29,8 @@ public class TrabajadorMapper {
         return new TrabajadorResponse(
                 entity.getId(),
                 entity.getNombre(),
-                entity.getCedula()
+                entity.getCedula(),
+                entity.getActivo()
         );
     }
 
@@ -39,5 +41,6 @@ public class TrabajadorMapper {
 
         entity.setNombre(request.nombre());
         entity.setCedula(request.cedula());
+        entity.setActivo(request.activo());
     }
 }

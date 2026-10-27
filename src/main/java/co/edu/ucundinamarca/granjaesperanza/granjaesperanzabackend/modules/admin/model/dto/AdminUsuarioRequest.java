@@ -1,4 +1,4 @@
-package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.autenticacion.model.dto;
+package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.admin.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -3,5 +3,6 @@ package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equi
 public record TrabajadorResponse (
         Integer id,
         String nombre,
-        String cedula
+        String cedula,
+        Boolean activo
 ) {}

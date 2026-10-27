@@ -15,6 +15,7 @@ public class CategoriaMapper {
 
         CategoriaEntity entity = new CategoriaEntity();
         entity.setNombre(request.nombre());
+        entity.setActivo(true);
 
         return entity;
     }
@@ -24,7 +25,7 @@ public class CategoriaMapper {
             return null;
         }
 
-        return new CategoriaResponse(entity.getId(), entity.getNombre());
+        return new CategoriaResponse(entity.getId(), entity.getNombre(), entity.getActivo());
     }
 
     public void updateEntityFromRequest(CategoriaRequest request, CategoriaEntity entity) {

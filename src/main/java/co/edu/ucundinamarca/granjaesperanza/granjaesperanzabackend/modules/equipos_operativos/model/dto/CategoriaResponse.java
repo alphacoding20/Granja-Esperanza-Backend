@@ -2,5 +2,6 @@ package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equi
 
 public record CategoriaResponse(
         Integer id,
-        String nombre
+        String nombre,
+        Boolean activo
 ) {}
