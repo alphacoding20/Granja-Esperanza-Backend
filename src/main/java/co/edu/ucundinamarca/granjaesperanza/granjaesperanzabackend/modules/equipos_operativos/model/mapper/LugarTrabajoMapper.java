@@ -24,7 +24,7 @@ public class LugarTrabajoMapper {
             return null;
         }
 
-        return new LugarTrabajoResponse(entity.getId(), entity.getNombre());
+        return new LugarTrabajoResponse(entity.getId(), entity.getNombre(), entity.getActivo());
     }
 
     public void updateEntityFromRequest(LugarTrabajoRequest request, LugarTrabajoEntity entity) {

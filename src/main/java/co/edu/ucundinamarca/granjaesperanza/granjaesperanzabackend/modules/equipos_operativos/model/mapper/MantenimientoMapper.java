@@ -17,7 +17,6 @@ public class MantenimientoMapper {
         }
 
         MantenimientoEntity entity = new MantenimientoEntity();
-        entity.setEquipo(request.equipo());
         entity.setFecha(request.fecha() != null ? request.fecha() : OffsetDateTime.now());
         entity.setTipo(request.tipo());
         entity.setDescripcion(request.descripcion());
@@ -45,7 +44,6 @@ public class MantenimientoMapper {
             return;
         }
 
-        entity.setEquipo(request.equipo());
         entity.setFecha(request.fecha() != null ? request.fecha() : entity.getFecha());
         entity.setTipo(request.tipo());
         entity.setDescripcion(request.descripcion());

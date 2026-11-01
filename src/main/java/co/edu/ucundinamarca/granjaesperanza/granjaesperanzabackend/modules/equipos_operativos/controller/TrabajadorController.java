@@ -31,7 +31,7 @@ public class TrabajadorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TrabajadorResponse>> obtenerTodosLosTrabajadores() {
+    public ResponseEntity<List<TrabajadorResponse>> listarTrabajadores() {
         List<TrabajadorResponse> response = trabajadorService.obtenerTodosLosTrabajadores();
         return ResponseEntity.ok(response);
     }

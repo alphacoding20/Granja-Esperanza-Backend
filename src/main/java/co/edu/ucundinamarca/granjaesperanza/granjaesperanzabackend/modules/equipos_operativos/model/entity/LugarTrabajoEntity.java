@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 public class LugarTrabajoEntity {
 
@@ -21,4 +20,7 @@ public class LugarTrabajoEntity {
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
 }

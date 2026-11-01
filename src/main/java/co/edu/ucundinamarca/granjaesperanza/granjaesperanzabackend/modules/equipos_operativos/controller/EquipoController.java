@@ -31,7 +31,7 @@ public class EquipoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EquipoResponse>> obtenerTodosLosEquipos() {
+    public ResponseEntity<List<EquipoResponse>> listarEquipos() {
         List<EquipoResponse> response = equipoService.obtenerTodosLosEquipos();
         return ResponseEntity.ok(response);
     }

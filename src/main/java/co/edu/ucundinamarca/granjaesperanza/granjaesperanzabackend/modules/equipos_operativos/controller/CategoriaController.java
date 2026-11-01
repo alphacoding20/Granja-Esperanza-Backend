@@ -31,7 +31,7 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaResponse>> obtenerTodasLasCategorias() {
+    public ResponseEntity<List<CategoriaResponse>> listarCategorias() {
         List<CategoriaResponse> response = categoriaService.obtenerTodasLasCategorias();
         return ResponseEntity.ok(response);
     }

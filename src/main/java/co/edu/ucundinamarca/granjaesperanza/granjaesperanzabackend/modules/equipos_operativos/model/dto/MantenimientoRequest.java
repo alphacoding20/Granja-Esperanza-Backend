@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 
 public record MantenimientoRequest (
         @NotNull(message = "El id del equipo es obligatorio")
-        EquipoEntity equipo,
+        Integer idEquipo,
         OffsetDateTime fecha,
         @NotBlank(message = "El tipo es obligatorio")
         @Size(max = 20)

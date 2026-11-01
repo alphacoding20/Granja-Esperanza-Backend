@@ -30,6 +30,9 @@ public class RegistroUsoEntity {
     @JoinColumn(name = "id_equipo", referencedColumnName = "id", nullable = false)
     private EquipoEntity equipo;
 
+    @Column(name="accesorio")
+    private String accesorio;
+
     @Column(name = "fecha", nullable = false)
     @Builder.Default
     private LocalDate fecha = LocalDate.now();

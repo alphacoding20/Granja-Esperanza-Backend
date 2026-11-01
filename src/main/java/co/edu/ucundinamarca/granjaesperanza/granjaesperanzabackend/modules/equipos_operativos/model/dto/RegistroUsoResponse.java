@@ -11,6 +11,7 @@ public record RegistroUsoResponse (
         Integer id,
         TrabajadorEntity idTrabajador,
         EquipoEntity idEquipo,
+        String accesorio,
         LocalDate fecha,
         LocalTime horaInicio,
         LocalTime horaFin,
