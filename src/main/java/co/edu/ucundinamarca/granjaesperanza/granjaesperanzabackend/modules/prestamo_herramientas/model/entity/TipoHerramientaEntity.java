@@ -26,4 +26,7 @@ public class TipoHerramientaEntity {
 
     @Column(name = "disponibles", nullable = false)
     private Integer disponibles;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo = true;
 }

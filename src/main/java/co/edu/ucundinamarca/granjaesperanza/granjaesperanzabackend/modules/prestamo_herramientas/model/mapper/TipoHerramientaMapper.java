@@ -30,7 +30,8 @@ public class TipoHerramientaMapper {
                 entity.getId(),
                 entity.getNombre(),
                 entity.getCantidad(),
-                entity.getDisponibles()
+                entity.getDisponibles(),
+                entity.getActivo()
         );
     }
 

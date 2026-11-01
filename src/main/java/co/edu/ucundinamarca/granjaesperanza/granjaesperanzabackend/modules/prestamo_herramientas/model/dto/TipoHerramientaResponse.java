@@ -4,5 +4,6 @@ public record TipoHerramientaResponse(
         Integer id,
         String nombre,
         Integer cantidad,
-        Integer disponibles
+        Integer disponibles,
+        Boolean activo
 ) {}
