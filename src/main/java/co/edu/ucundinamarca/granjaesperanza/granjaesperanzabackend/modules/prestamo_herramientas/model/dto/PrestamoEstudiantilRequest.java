@@ -13,6 +13,7 @@ public record PrestamoEstudiantilRequest (
         String cedula,
         OffsetDateTime fechaPrestamo,
         OffsetDateTime fechaDevolucion,
+        Boolean devuelto,
         List<DetallePrestamoItemRequest> detalles
 ){
         public record DetallePrestamoItemRequest(

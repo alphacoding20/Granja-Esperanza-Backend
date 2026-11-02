@@ -32,9 +32,17 @@ public class EquipoEntity {
     @Builder.Default
     private EstadoEquipo estado = EstadoEquipo.ACTIVO;
 
+    @Column(name = "disponible", nullable = false)
+    @Builder.Default
+    private Boolean disponible = true;
+
     @Column(name = "horas_acumuladas", precision = 7, scale = 1)
     @Builder.Default
     private BigDecimal horasAcumuladas = BigDecimal.valueOf(0.0);
+
+    @Column(name = "horas_totales", precision = 7, scale = 1)
+    @Builder.Default
+    private BigDecimal horasTotales = BigDecimal.valueOf(0.0);
 
     @Column(name = "umbral_mantenimiento", precision = 7, scale = 1)
     private BigDecimal umbralMantenimiento;

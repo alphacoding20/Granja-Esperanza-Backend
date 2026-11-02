@@ -18,6 +18,7 @@ public class PrestamoEstudiantilMapper {
         PrestamoEstudiantilEntity entity = new PrestamoEstudiantilEntity();
         entity.setCedula(request.cedula());
         entity.setFechaPrestamo(request.fechaPrestamo() != null ? request.fechaPrestamo() : OffsetDateTime.now());
+        entity.setDevuelto(request.devuelto());
         entity.setFechaDevolucion(request.fechaDevolucion());
 
         return entity;
@@ -32,6 +33,7 @@ public class PrestamoEstudiantilMapper {
                 entity.getId(),
                 entity.getCedula(),
                 entity.getFechaPrestamo(),
+                entity.getDevuelto(),
                 entity.getFechaDevolucion()
         );
     }
@@ -43,6 +45,7 @@ public class PrestamoEstudiantilMapper {
 
         entity.setCedula(request.cedula());
         entity.setFechaPrestamo(request.fechaPrestamo() != null ? request.fechaPrestamo() : entity.getFechaPrestamo());
+        entity.setDevuelto(request.devuelto());
         entity.setFechaDevolucion(request.fechaDevolucion());
     }
 }

@@ -27,6 +27,10 @@ public class PrestamoEstudiantilEntity {
     @Builder.Default
     private OffsetDateTime fechaPrestamo = OffsetDateTime.now();
 
+    @Column(name = "devuelto", nullable = false)
+    @Builder.Default
+    private Boolean devuelto = false;
+
     @Column(name = "fecha_devolucion")
     private OffsetDateTime fechaDevolucion;
 }

@@ -20,8 +20,9 @@ public class EquipoMapper {
         EquipoEntity entity = new EquipoEntity();
         entity.setCategoria(categoria);
         entity.setNombre(request.nombre());
-        entity.setEstado(request.estado());
         entity.setHorasAcumuladas(request.horasAcumuladas());
+        entity.setHorasTotales(request.horasTotales());
+        entity.setUmbralMantenimiento(request.umbralMantenimiento());
 
         return entity;
     }
@@ -38,7 +39,9 @@ public class EquipoMapper {
                 idCategoria,
                 entity.getNombre(),
                 entity.getEstado(),
+                entity.getDisponible(),
                 entity.getHorasAcumuladas(),
+                entity.getHorasTotales(),
                 entity.getUmbralMantenimiento()
         );
     }
@@ -52,7 +55,8 @@ public class EquipoMapper {
         categoria.setId(request.idCategoria());
         entity.setCategoria(categoria);
         entity.setNombre(request.nombre());
-        entity.setEstado(request.estado());
         entity.setHorasAcumuladas(request.horasAcumuladas());
+        entity.setHorasTotales(request.horasTotales());
+        entity.setUmbralMantenimiento(request.umbralMantenimiento());
     }
 }

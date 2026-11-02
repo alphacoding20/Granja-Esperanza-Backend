@@ -29,6 +29,8 @@ public class EquipoService {
 
         EquipoEntity equipo = equipoMapper.toEntity(equipoRequest);
         equipo.setCategoria(categoria);
+        equipo.setEstado(EstadoEquipo.ACTIVO);
+        equipo.setDisponible(true);
 
         if (equipo.getEstado() == null) {
             equipo.setEstado(EstadoEquipo.ACTIVO);
@@ -62,7 +64,6 @@ public class EquipoService {
 
         equipoExistente.setCategoria(categoria);
         equipoExistente.setNombre(equipoRequest.nombre());
-        equipoExistente.setEstado(equipoRequest.estado());
         equipoExistente.setHorasAcumuladas(equipoRequest.horasAcumuladas());
 
         EquipoEntity equipoActualizado = equipoJpaRepository.save(equipoExistente);

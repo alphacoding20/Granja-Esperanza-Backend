@@ -6,5 +6,6 @@ public record PrestamoEstudiantilResponse (
         Integer id,
         String cedula,
         OffsetDateTime fechaPrestamo,
+        Boolean devuelto,
         OffsetDateTime fechaDevolucion
 ){}

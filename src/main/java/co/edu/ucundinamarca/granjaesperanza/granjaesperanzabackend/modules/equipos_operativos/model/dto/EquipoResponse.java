@@ -9,6 +9,8 @@ public record EquipoResponse (
         Integer idCategoria,
         String nombre,
         EstadoEquipo estado,
+        Boolean disponible,
         BigDecimal horasAcumuladas,
+        BigDecimal horasTotales,
         BigDecimal umbralMantenimiento
 ) {}
