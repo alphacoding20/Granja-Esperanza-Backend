@@ -37,15 +37,18 @@ public class RegistroUsoEntity {
     @Builder.Default
     private LocalDate fecha = LocalDate.now();
 
+    @Column(name = "lugar_uso", nullable = false)
+    private String lugar_uso;
+
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
 
     @Column(name = "hora_fin", nullable = false)
     private LocalTime horaFin;
 
+    @Column(name = "uso_combustible")
+    private BigDecimal uso_combustible;
+
     @Column(name = "total_horas", nullable = false, precision = 4, scale = 1)
     private BigDecimal totalHoras;
-
-    @Column(name = "novedades", columnDefinition = "TEXT")
-    private String novedades;
 }

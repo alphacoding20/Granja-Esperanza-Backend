@@ -14,11 +14,11 @@ public record RegistroUsoRequest (
         Integer idTrabajador,
         @NotNull(message = "El id del equipo es obligatorio")
         Integer idEquipo,
-        List<Integer> idsLugaresTrabajo,
         String accesorio,
         LocalDate fecha,
+        String lugar_uso,
         LocalTime horaInicio,
         LocalTime horaFin,
-        BigDecimal totalHoras,
-        String novedades
+        BigDecimal uso_combustible,
+        BigDecimal totalHoras
 ){}

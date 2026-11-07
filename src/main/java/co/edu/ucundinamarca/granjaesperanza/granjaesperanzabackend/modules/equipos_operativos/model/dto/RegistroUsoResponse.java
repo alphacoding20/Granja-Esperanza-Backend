@@ -13,8 +13,9 @@ public record RegistroUsoResponse (
         EquipoEntity idEquipo,
         String accesorio,
         LocalDate fecha,
+        String lugar_uso,
         LocalTime horaInicio,
         LocalTime horaFin,
-        BigDecimal totalHoras,
-        String novedades
+        BigDecimal uso_combustible,
+        BigDecimal totalHoras
 ){}

@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "uso_lugar")
+@Table(name = "novedad")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-public class UsoLugarEntity {
+public class NovedadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +18,9 @@ public class UsoLugarEntity {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lugar_trabajo", referencedColumnName = "id", nullable = false)
-    private LugarTrabajoEntity lugarTrabajo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_registro_uso", referencedColumnName = "id", nullable = false)
     private RegistroUsoEntity registroUso;
+
+    @Column(name = "descripcion", columnDefinition = "TEXT")
+    private String descripcion;
 }

@@ -28,8 +28,10 @@ public class RegistroUsoMapper {
         entity.setEquipo(equipo);
         entity.setAccesorio(request.accesorio());
         entity.setFecha(request.fecha() != null ? request.fecha() : LocalDate.now());
+        entity.setLugar_uso(request.lugar_uso());
         entity.setHoraInicio(request.horaInicio());
         entity.setHoraFin(request.horaFin());
+        entity.setUso_combustible(request.uso_combustible());
         entity.setTotalHoras(request.totalHoras());
 
         return entity;
@@ -46,10 +48,11 @@ public class RegistroUsoMapper {
                 entity.getEquipo(),
                 entity.getAccesorio(),
                 entity.getFecha(),
+                entity.getLugar_uso(),
                 entity.getHoraInicio(),
                 entity.getHoraFin(),
-                entity.getTotalHoras(),
-                entity.getNovedades()
+                entity.getUso_combustible(),
+                entity.getTotalHoras()
         );
     }
 
@@ -68,9 +71,10 @@ public class RegistroUsoMapper {
         entity.setEquipo(equipo);
         entity.setAccesorio(request.accesorio());
         entity.setFecha(request.fecha() != null ? request.fecha() : entity.getFecha());
+        entity.setLugar_uso(request.lugar_uso());
         entity.setHoraInicio(request.horaInicio());
         entity.setHoraFin(request.horaFin());
+        entity.setUso_combustible(request.uso_combustible());
         entity.setTotalHoras(request.totalHoras());
-        entity.setNovedades(request.novedades());
     }
 }

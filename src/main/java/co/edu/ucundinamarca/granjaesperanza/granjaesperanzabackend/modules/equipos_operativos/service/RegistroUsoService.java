@@ -20,8 +20,6 @@ public class RegistroUsoService {
     private final RegistroUsoJpaRepository registroUsoJpaRepository;
     private final TrabajadorJpaRepository trabajadorJpaRepository;
     private final EquipoJpaRepository equipoJpaRepository;
-    private final LugarTrabajoJpaRepository lugarTrabajoJpaRepository;
-    private final UsoLugarJpaRepository usoLugarJpaRepository;
     private final RegistroUsoMapper registroUsoMapper;
 
     @Transactional
@@ -41,19 +39,6 @@ public class RegistroUsoService {
         }
 
         RegistroUsoEntity guardado = registroUsoJpaRepository.save(entity);
-
-        if (request.idsLugaresTrabajo() != null && !request.idsLugaresTrabajo().isEmpty()) {
-            for (Integer idLugar : request.idsLugaresTrabajo()) {
-                LugarTrabajoEntity lugarTrabajo = lugarTrabajoJpaRepository.findById(idLugar)
-                        .orElseThrow(() -> new RuntimeException("Lugar de trabajo no encontrado con ID: " + idLugar));
-
-                UsoLugarEntity usoLugar = new UsoLugarEntity();
-                usoLugar.setRegistroUso(guardado);
-                usoLugar.setLugarTrabajo(lugarTrabajo);
-
-                usoLugarJpaRepository.save(usoLugar);
-            }
-        }
 
         return registroUsoMapper.toResponse(guardado);
     }
@@ -87,21 +72,6 @@ public class RegistroUsoService {
 
         RegistroUsoEntity actualizado = registroUsoJpaRepository.save(existente);
 
-        usoLugarJpaRepository.deleteByRegistroUsoId(id);
-
-        if (request.idsLugaresTrabajo() != null && !request.idsLugaresTrabajo().isEmpty()) {
-            for (Integer idLugar : request.idsLugaresTrabajo()) {
-                LugarTrabajoEntity lugarTrabajo = lugarTrabajoJpaRepository.findById(idLugar)
-                        .orElseThrow(() -> new RuntimeException("Lugar de trabajo no encontrado con ID: " + idLugar));
-
-                UsoLugarEntity usoLugar = new UsoLugarEntity();
-                usoLugar.setRegistroUso(actualizado);
-                usoLugar.setLugarTrabajo(lugarTrabajo);
-
-                usoLugarJpaRepository.save(usoLugar);
-            }
-        }
-
         return registroUsoMapper.toResponse(actualizado);
     }
 
@@ -110,7 +80,6 @@ public class RegistroUsoService {
         RegistroUsoEntity existente = registroUsoJpaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Registro de uso no encontrado con ID: " + id));
 
-        usoLugarJpaRepository.deleteByRegistroUsoId(id);
         registroUsoJpaRepository.delete(existente);
     }
 }
