@@ -5,6 +5,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.CategoriaEntity;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper.CategoriaMapper;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.CategoriaJpaRepository;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.shared.exception.RecursoNoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class CategoriaService {
 
     public CategoriaResponse consultarCategoria(Integer id) {
         CategoriaEntity categoria = categoriaJpaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría no encontrada con ID: " + id));
         return categoriaMapper.toResponse(categoria);
     }
 
@@ -39,7 +40,7 @@ public class CategoriaService {
 
     public CategoriaResponse actualizarCategoria(Integer id, CategoriaRequest request) {
         CategoriaEntity existente = categoriaJpaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría no encontrada con ID: " + id));
 
         existente.setNombre(request.nombre());
         CategoriaEntity actualizada = categoriaJpaRepository.save(existente);
@@ -48,7 +49,7 @@ public class CategoriaService {
 
     public void eliminarCategoria(Integer id) {
         CategoriaEntity existente = categoriaJpaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría no encontrada con ID: " + id));
         existente.setActivo(false);
         categoriaJpaRepository.save(existente);
     }

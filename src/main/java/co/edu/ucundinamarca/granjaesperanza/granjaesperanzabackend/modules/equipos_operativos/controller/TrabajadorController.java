@@ -25,15 +25,25 @@ public class TrabajadorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrabajadorResponse> consultarTrabajador(@PathVariable Integer id) {
-        TrabajadorResponse response = trabajadorService.consultarTrabajador(id);
+    public ResponseEntity<TrabajadorResponse> buscarTrabajadorPorId(@PathVariable Integer id) {
+        TrabajadorResponse response = trabajadorService.buscarTrabajadorPorId(id);
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/cedula/{cedula}")
+    public ResponseEntity<TrabajadorResponse> buscarTrabajadorPorCedula(@PathVariable String cedula) {
+        return ResponseEntity.ok(trabajadorService.buscarTrabajadorPorCedula(cedula));
+    }
+
     @GetMapping
-    public ResponseEntity<List<TrabajadorResponse>> listarTrabajadores() {
-        List<TrabajadorResponse> response = trabajadorService.obtenerTodosLosTrabajadores();
-        return ResponseEntity.ok(response);
+    public ResponseEntity<List<TrabajadorResponse>> listarOFiltrarTrabajadores(
+            @RequestParam(required = false) String nombre) {
+
+        if (nombre != null && !nombre.isBlank()) {
+            return ResponseEntity.ok(trabajadorService.buscarTrabajadorPorNombre(nombre));
+        }
+
+        return ResponseEntity.ok(trabajadorService.obtenerTodosLosTrabajadores());
     }
 
     @PutMapping("/{id}")

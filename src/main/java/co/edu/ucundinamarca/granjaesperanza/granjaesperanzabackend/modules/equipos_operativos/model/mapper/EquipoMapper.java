@@ -4,10 +4,14 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.EquipoResponse;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.CategoriaEntity;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.EquipoEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class EquipoMapper {
+
+    private final CategoriaMapper categoriaMapper;
 
     public EquipoEntity toEntity(EquipoRequest request) {
         if (request == null) {
@@ -20,6 +24,8 @@ public class EquipoMapper {
         EquipoEntity entity = new EquipoEntity();
         entity.setCategoria(categoria);
         entity.setNombre(request.nombre());
+        entity.setPlaca(request.placa());
+        entity.setImagenUrl(request.imagenUrl());
         entity.setHorasAcumuladas(request.horasAcumuladas());
         entity.setHorasTotales(request.horasTotales());
         entity.setUmbralMantenimiento(request.umbralMantenimiento());
@@ -36,8 +42,10 @@ public class EquipoMapper {
 
         return new EquipoResponse(
                 entity.getId(),
-                idCategoria,
+                categoriaMapper.toResponse(entity.getCategoria()),
                 entity.getNombre(),
+                entity.getPlaca(),
+                entity.getImagenUrl(),
                 entity.getEstado(),
                 entity.getDisponible(),
                 entity.getHorasAcumuladas(),
@@ -55,6 +63,8 @@ public class EquipoMapper {
         categoria.setId(request.idCategoria());
         entity.setCategoria(categoria);
         entity.setNombre(request.nombre());
+        entity.setPlaca(request.placa());
+        entity.setImagenUrl(request.imagenUrl());
         entity.setHorasAcumuladas(request.horasAcumuladas());
         entity.setHorasTotales(request.horasTotales());
         entity.setUmbralMantenimiento(request.umbralMantenimiento());

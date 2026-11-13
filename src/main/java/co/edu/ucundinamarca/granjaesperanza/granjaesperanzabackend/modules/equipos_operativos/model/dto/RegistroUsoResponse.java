@@ -9,13 +9,14 @@ import java.time.LocalTime;
 
 public record RegistroUsoResponse (
         Integer id,
-        TrabajadorEntity idTrabajador,
-        EquipoEntity idEquipo,
+        TrabajadorResponse trabajador,
+        EquipoResponse equipo,
         String accesorio,
         LocalDate fecha,
-        String lugar_uso,
+        String lugarUso,
         LocalTime horaInicio,
         LocalTime horaFin,
-        BigDecimal uso_combustible,
+        BigDecimal horasInactivo,
+        BigDecimal usoCombustible,
         BigDecimal totalHoras
 ){}

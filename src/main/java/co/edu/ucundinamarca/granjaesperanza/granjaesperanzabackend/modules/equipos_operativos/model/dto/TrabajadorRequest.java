@@ -11,5 +11,6 @@ public record TrabajadorRequest (
         @NotBlank(message = "La cédula es obligatoria")
         @Size(max = 20, message = "La cédula no debe superar los 20 carácteres")
         String cedula,
+        String imagenUrl,
         Boolean activo
 ){}

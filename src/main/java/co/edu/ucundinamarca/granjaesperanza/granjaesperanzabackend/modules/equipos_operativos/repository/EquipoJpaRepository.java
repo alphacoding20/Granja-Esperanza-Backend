@@ -4,6 +4,11 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface EquipoJpaRepository extends JpaRepository<EquipoEntity, Integer> {
+    Optional<EquipoEntity> findByPlaca(String placa);
+    List<EquipoEntity> findByNombreContainingIgnoreCase(String nombre);
 }

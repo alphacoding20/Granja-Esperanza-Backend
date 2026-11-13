@@ -6,6 +6,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.TrabajadorEntity;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper.TrabajadorMapper;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.TrabajadorJpaRepository;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.shared.exception.RecursoNoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,25 @@ public class TrabajadorService {
         return trabajadorMapper.toResponse(trabajadorGuardado);
     }
 
-    public TrabajadorResponse consultarTrabajador(Integer idTrabajador) {
+    public TrabajadorResponse buscarTrabajadorPorId(Integer idTrabajador) {
         TrabajadorEntity trabajador = trabajadorJpaRepository.findById(idTrabajador)
-                .orElseThrow(() -> new RuntimeException("Trabajador no encontrado"));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Trabajador no encontrado"));
         return trabajadorMapper.toResponse(trabajador);
+    }
+
+    public TrabajadorResponse buscarTrabajadorPorCedula(String cedula) {
+        TrabajadorEntity trabajador = trabajadorJpaRepository.findByCedula(cedula)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Trabajador no encontrado con la cédula: " + cedula));
+
+        return trabajadorMapper.toResponse(trabajador);
+    }
+
+    public List<TrabajadorResponse> buscarTrabajadorPorNombre(String nombre) {
+        List<TrabajadorEntity> trabajadores = trabajadorJpaRepository.findByNombreContainingIgnoreCase(nombre);
+
+        return trabajadores.stream()
+                .map(trabajadorMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public List<TrabajadorResponse> obtenerTodosLosTrabajadores() {
@@ -40,11 +56,11 @@ public class TrabajadorService {
 
     public TrabajadorResponse actualizarTrabajador(Integer idTrabajador, TrabajadorRequest trabajadorRequest) {
         TrabajadorEntity trabajadorExistente = trabajadorJpaRepository.findById(idTrabajador)
-                .orElseThrow(() -> new RuntimeException("Trabajador no encontrado"));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Trabajador no encontrado"));
 
         trabajadorExistente.setNombre(trabajadorRequest.nombre());
         trabajadorExistente.setCedula(trabajadorRequest.cedula());
-        trabajadorExistente.setActivo(trabajadorRequest.activo());
+        trabajadorExistente.setImagenUrl(trabajadorRequest.imagenUrl());
 
         TrabajadorEntity trabajadorActualizado = trabajadorJpaRepository.save(trabajadorExistente);
         return trabajadorMapper.toResponse(trabajadorActualizado);
@@ -52,7 +68,7 @@ public class TrabajadorService {
 
     public void eliminarTrabajador(Integer idTrabajador) {
         TrabajadorEntity trabajadorExistente = trabajadorJpaRepository.findById(idTrabajador)
-                .orElseThrow(() -> new RuntimeException("Trabajador no encontrado"));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Trabajador no encontrado"));
 
         trabajadorExistente.setActivo(false);
         trabajadorJpaRepository.save(trabajadorExistente);

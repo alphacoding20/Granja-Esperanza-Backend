@@ -3,6 +3,7 @@ package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equi
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "trabajador")
@@ -11,6 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@SQLRestriction("activo = true")
 
 public class TrabajadorEntity {
 
@@ -24,6 +26,9 @@ public class TrabajadorEntity {
 
     @Column(name = "cedula", nullable = false, length = 20, unique = true)
     private String cedula;
+
+    @Column(name = "imagen_url", columnDefinition = "TEXT")
+    private String imagenUrl;
 
     @Column(name = "activo", nullable = false)
     private Boolean activo;

@@ -6,8 +6,10 @@ import java.math.BigDecimal;
 
 public record EquipoResponse (
         Integer id,
-        Integer idCategoria,
+        CategoriaResponse categoria,
         String nombre,
+        String placa,
+        String imagenUrl,
         EstadoEquipo estado,
         Boolean disponible,
         BigDecimal horasAcumuladas,

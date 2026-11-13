@@ -1,18 +1,27 @@
 package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper;
 
-import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.RegistroUsoRequest;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.DevolucionEquipoRequest;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.PrestamoEquipoRequest;
+import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.RegistroUsoManualRequest;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.dto.RegistroUsoResponse;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.EquipoEntity;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.RegistroUsoEntity;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.entity.TrabajadorEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Component
+@RequiredArgsConstructor
 public class RegistroUsoMapper {
 
-    public RegistroUsoEntity toEntity(RegistroUsoRequest request) {
+    private final TrabajadorMapper trabajadorMapper;
+    private final EquipoMapper equipoMapper;
+
+    public RegistroUsoEntity toEntity(RegistroUsoManualRequest request) {
         if (request == null) {
             return null;
         }
@@ -28,11 +37,25 @@ public class RegistroUsoMapper {
         entity.setEquipo(equipo);
         entity.setAccesorio(request.accesorio());
         entity.setFecha(request.fecha() != null ? request.fecha() : LocalDate.now());
-        entity.setLugar_uso(request.lugar_uso());
+        entity.setLugarUso(request.lugarUso());
         entity.setHoraInicio(request.horaInicio());
         entity.setHoraFin(request.horaFin());
-        entity.setUso_combustible(request.uso_combustible());
-        entity.setTotalHoras(request.totalHoras());
+        entity.setHorasInactivo(request.horasInactivo());
+        entity.setUsoCombustible(request.usoCombustible());
+
+        return entity;
+    }
+
+    public RegistroUsoEntity toEntityFromPrestamo(PrestamoEquipoRequest request) {
+        if (request == null) {
+            return null;
+        }
+
+        RegistroUsoEntity entity = new RegistroUsoEntity();
+        entity.setAccesorio(request.accesorio());
+        entity.setLugarUso(request.lugarUso());
+        entity.setFecha(LocalDate.now());
+        entity.setHoraInicio(LocalTime.now());
 
         return entity;
     }
@@ -44,19 +67,20 @@ public class RegistroUsoMapper {
 
         return new RegistroUsoResponse(
                 entity.getId(),
-                entity.getTrabajador(),
-                entity.getEquipo(),
+                trabajadorMapper.toResponse(entity.getTrabajador()),
+                equipoMapper.toResponse(entity.getEquipo()),
                 entity.getAccesorio(),
                 entity.getFecha(),
-                entity.getLugar_uso(),
+                entity.getLugarUso(),
                 entity.getHoraInicio(),
                 entity.getHoraFin(),
-                entity.getUso_combustible(),
+                entity.getHorasInactivo(),
+                entity.getUsoCombustible(),
                 entity.getTotalHoras()
         );
     }
 
-    public void updateEntityFromRequest(RegistroUsoRequest request, RegistroUsoEntity entity) {
+    public void updateEntityFromRequest(RegistroUsoManualRequest request, RegistroUsoEntity entity) {
         if (entity == null || request == null) {
             return;
         }
@@ -71,10 +95,25 @@ public class RegistroUsoMapper {
         entity.setEquipo(equipo);
         entity.setAccesorio(request.accesorio());
         entity.setFecha(request.fecha() != null ? request.fecha() : entity.getFecha());
-        entity.setLugar_uso(request.lugar_uso());
+        entity.setLugarUso(request.lugarUso());
         entity.setHoraInicio(request.horaInicio());
         entity.setHoraFin(request.horaFin());
-        entity.setUso_combustible(request.uso_combustible());
-        entity.setTotalHoras(request.totalHoras());
+        entity.setHorasInactivo(request.horasInactivo());
+        entity.setUsoCombustible(request.usoCombustible());
+    }
+
+    public void updateEntityFromDevolucion(DevolucionEquipoRequest request, RegistroUsoEntity entity) {
+        if (request == null || entity == null) {
+            return;
+        }
+
+        entity.setHoraFin(LocalTime.now());
+
+        BigDecimal horasInactivo = request.horasInactivo() != null
+                ? request.horasInactivo()
+                : BigDecimal.ZERO;
+        entity.setHorasInactivo(horasInactivo);
+
+        entity.setUsoCombustible(request.usoCombustible());
     }
 }

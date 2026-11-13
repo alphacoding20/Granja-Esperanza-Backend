@@ -2,6 +2,7 @@ package co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equi
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.math.BigDecimal;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@SQLRestriction("estado = 'ACTIVO'")
 
 public class EquipoEntity {
 
@@ -26,6 +28,12 @@ public class EquipoEntity {
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+
+    @Column(name = "placa", nullable = false, length = 20)
+    private String placa;
+
+    @Column(name = "imagen_url", columnDefinition = "TEXT")
+    private String imagenUrl;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 50)

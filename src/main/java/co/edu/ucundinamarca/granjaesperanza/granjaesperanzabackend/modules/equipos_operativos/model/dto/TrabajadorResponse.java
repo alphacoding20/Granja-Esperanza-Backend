@@ -4,5 +4,5 @@ public record TrabajadorResponse (
         Integer id,
         String nombre,
         String cedula,
-        Boolean activo
+        String imagenUrl
 ) {}

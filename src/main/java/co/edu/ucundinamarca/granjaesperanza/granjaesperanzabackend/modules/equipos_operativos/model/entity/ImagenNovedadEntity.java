@@ -20,6 +20,6 @@ public class ImagenNovedadEntity {
     @JoinColumn(name = "id_novedad", referencedColumnName = "id", nullable = false)
     private NovedadEntity novedad;
 
-    @Column(name = "url",  nullable = false, columnDefinition = "TEXT")
+    @Column(name = "url", columnDefinition = "TEXT")
     private String url;
 }

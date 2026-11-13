@@ -25,15 +25,26 @@ public class EquipoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipoResponse> consultarEquipo(@PathVariable Integer id) {
-        EquipoResponse response = equipoService.consultarEquipo(id);
+    public ResponseEntity<EquipoResponse> buscarEquipoPorId(@PathVariable Integer id) {
+        EquipoResponse response = equipoService.buscarEquipoPorId(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/placa/{placa}")
+    public ResponseEntity<EquipoResponse> buscarEquipoPorPlaca(@PathVariable String placa) {
+        EquipoResponse response = equipoService.buscarEquipoPorPlaca(placa);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<EquipoResponse>> listarEquipos() {
-        List<EquipoResponse> response = equipoService.obtenerTodosLosEquipos();
-        return ResponseEntity.ok(response);
+    public ResponseEntity<List<EquipoResponse>> listarOFiltrarEquipos(
+            @RequestParam(required = false) String nombre) {
+
+        if (nombre != null && !nombre.isBlank()) {
+            return ResponseEntity.ok(equipoService.buscarEquipoPorNombre(nombre));
+        }
+
+        return ResponseEntity.ok(equipoService.obtenerTodosLosEquipos());
     }
 
     @PutMapping("/{id}")

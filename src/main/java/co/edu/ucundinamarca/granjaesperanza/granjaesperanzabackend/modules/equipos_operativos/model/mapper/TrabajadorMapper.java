@@ -16,6 +16,7 @@ public class TrabajadorMapper {
         TrabajadorEntity entity = new TrabajadorEntity();
         entity.setNombre(request.nombre());
         entity.setCedula(request.cedula());
+        entity.setImagenUrl(request.imagenUrl());
         entity.setActivo(request.activo());
 
         return entity;
@@ -30,7 +31,7 @@ public class TrabajadorMapper {
                 entity.getId(),
                 entity.getNombre(),
                 entity.getCedula(),
-                entity.getActivo()
+                entity.getImagenUrl()
         );
     }
 
@@ -41,6 +42,7 @@ public class TrabajadorMapper {
 
         entity.setNombre(request.nombre());
         entity.setCedula(request.cedula());
+        entity.setImagenUrl(request.imagenUrl());
         entity.setActivo(request.activo());
     }
 }

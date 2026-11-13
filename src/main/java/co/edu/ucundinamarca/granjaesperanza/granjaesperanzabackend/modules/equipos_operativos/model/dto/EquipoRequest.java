@@ -14,6 +14,9 @@ public record EquipoRequest(
         @NotBlank(message = "El nombre no puede estar vacío")
         @Size(max = 100, message = "El nombre no debe superar los 100 carácteres")
         String nombre,
+        @NotBlank(message = "La placa es obligatoria")
+        String placa,
+        String imagenUrl,
         @Digits(integer = 7, fraction = 1, message = "El número puede tener máximo 7 digitos enteros y 1 decimal")
         BigDecimal horasAcumuladas,
         @Digits(integer = 7, fraction = 1, message = "El número puede tener máximo 7 digitos enteros y 1 decimal")
