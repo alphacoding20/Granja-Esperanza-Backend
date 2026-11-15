@@ -30,10 +30,18 @@ public class ImagenNovedadMapper {
         if (entity == null) {
             return null;
         }
+
         return new ImagenNovedadResponse(
                 entity.getId(),
-                entity.getNovedad(),
+                entity.getNovedad() != null ? entity.getNovedad().getId() : null,
                 entity.getUrl()
         );
+    }
+
+    public void updateEntityFromRequest(ImagenNovedadRequest request, ImagenNovedadEntity entity) {
+        if (request == null || entity == null) {
+            return;
+        }
+        entity.setUrl(request.url());
     }
 }

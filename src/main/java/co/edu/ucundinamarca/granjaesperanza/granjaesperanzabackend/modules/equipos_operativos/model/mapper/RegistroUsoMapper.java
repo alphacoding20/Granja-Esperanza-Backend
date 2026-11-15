@@ -20,6 +20,7 @@ public class RegistroUsoMapper {
 
     private final TrabajadorMapper trabajadorMapper;
     private final EquipoMapper equipoMapper;
+    private final NovedadMapper novedadMapper;
 
     public RegistroUsoEntity toEntity(RegistroUsoManualRequest request) {
         if (request == null) {
@@ -76,7 +77,8 @@ public class RegistroUsoMapper {
                 entity.getHoraFin(),
                 entity.getHorasInactivo(),
                 entity.getUsoCombustible(),
-                entity.getTotalHoras()
+                entity.getTotalHoras(),
+                novedadMapper.toResponse(entity.getNovedad())
         );
     }
 

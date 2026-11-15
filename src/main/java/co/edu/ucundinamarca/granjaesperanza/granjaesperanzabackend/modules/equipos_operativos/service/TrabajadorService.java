@@ -7,6 +7,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper.TrabajadorMapper;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.TrabajadorJpaRepository;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.shared.exception.RecursoNoEncontradoException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,13 +55,12 @@ public class TrabajadorService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public TrabajadorResponse actualizarTrabajador(Integer idTrabajador, TrabajadorRequest trabajadorRequest) {
         TrabajadorEntity trabajadorExistente = trabajadorJpaRepository.findById(idTrabajador)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Trabajador no encontrado"));
 
-        trabajadorExistente.setNombre(trabajadorRequest.nombre());
-        trabajadorExistente.setCedula(trabajadorRequest.cedula());
-        trabajadorExistente.setImagenUrl(trabajadorRequest.imagenUrl());
+        trabajadorMapper.updateEntityFromRequest(trabajadorRequest, trabajadorExistente);
 
         TrabajadorEntity trabajadorActualizado = trabajadorJpaRepository.save(trabajadorExistente);
         return trabajadorMapper.toResponse(trabajadorActualizado);

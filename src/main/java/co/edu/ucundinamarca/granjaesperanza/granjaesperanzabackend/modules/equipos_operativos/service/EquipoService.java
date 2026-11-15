@@ -9,6 +9,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.CategoriaJpaRepository;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.EquipoJpaRepository;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.shared.exception.RecursoNoEncontradoException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,7 @@ public class EquipoService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public EquipoResponse actualizarEquipo(Integer idEquipo, EquipoRequest equipoRequest) {
         EquipoEntity equipoExistente = equipoJpaRepository.findById(idEquipo)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Equipo no encontrado con ID: " + idEquipo));
@@ -82,9 +84,9 @@ public class EquipoService {
         CategoriaEntity categoria = categoriaJpaRepository.findById(equipoRequest.idCategoria())
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoría no encontrada con ID: " + equipoRequest.idCategoria()));
 
+        equipoMapper.updateEntityFromRequest(equipoRequest, equipoExistente);
+
         equipoExistente.setCategoria(categoria);
-        equipoExistente.setNombre(equipoRequest.nombre());
-        equipoExistente.setHorasAcumuladas(equipoRequest.horasAcumuladas());
 
         EquipoEntity equipoActualizado = equipoJpaRepository.save(equipoExistente);
         return equipoMapper.toResponse(equipoActualizado);

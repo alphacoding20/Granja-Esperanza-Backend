@@ -18,5 +18,6 @@ public record RegistroUsoResponse (
         LocalTime horaFin,
         BigDecimal horasInactivo,
         BigDecimal usoCombustible,
-        BigDecimal totalHoras
+        BigDecimal totalHoras,
+        NovedadResponse novedad
 ){}

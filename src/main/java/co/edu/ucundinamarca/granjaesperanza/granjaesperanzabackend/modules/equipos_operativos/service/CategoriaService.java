@@ -6,6 +6,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper.CategoriaMapper;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.CategoriaJpaRepository;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.shared.exception.RecursoNoEncontradoException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +39,13 @@ public class CategoriaService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public CategoriaResponse actualizarCategoria(Integer id, CategoriaRequest request) {
         CategoriaEntity existente = categoriaJpaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoría no encontrada con ID: " + id));
 
-        existente.setNombre(request.nombre());
+        categoriaMapper.updateEntityFromRequest(request, existente);
+
         CategoriaEntity actualizada = categoriaJpaRepository.save(existente);
         return categoriaMapper.toResponse(actualizada);
     }

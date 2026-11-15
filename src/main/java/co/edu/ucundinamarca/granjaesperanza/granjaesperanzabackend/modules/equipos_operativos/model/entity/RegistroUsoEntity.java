@@ -54,4 +54,7 @@ public class RegistroUsoEntity {
 
     @Column(name = "total_horas", precision = 4, scale = 1)
     private BigDecimal totalHoras;
+
+    @OneToOne(mappedBy = "registroUso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private NovedadEntity novedad;
 }

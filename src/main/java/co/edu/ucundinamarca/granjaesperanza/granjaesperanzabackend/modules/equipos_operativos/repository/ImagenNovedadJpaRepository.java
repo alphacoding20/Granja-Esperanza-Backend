@@ -4,6 +4,9 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ImagenNovedadJpaRepository extends JpaRepository<ImagenNovedadEntity, Integer> {
+    List<ImagenNovedadEntity> findByNovedadId(Integer idNovedad);
 }

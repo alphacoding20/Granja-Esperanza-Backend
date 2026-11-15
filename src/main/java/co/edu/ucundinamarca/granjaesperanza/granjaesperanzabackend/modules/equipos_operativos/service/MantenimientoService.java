@@ -7,6 +7,7 @@ import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equip
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.model.mapper.MantenimientoMapper;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.EquipoJpaRepository;
 import co.edu.ucundinamarca.granjaesperanza.granjaesperanzabackend.modules.equipos_operativos.repository.MantenimientoJpaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,18 +50,16 @@ public class MantenimientoService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public MantenimientoResponse actualizarMantenimiento(Integer id, MantenimientoRequest request) {
         MantenimientoEntity existente = mantenimientoJpaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mantenimiento no encontrado con ID: " + id));
 
         EquipoEntity equipo = equipoJpaRepository.findById(request.idEquipo())
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado con ID: " + request.idEquipo()));
+        mantenimientoMapper.updateEntityFromRequest(request, existente);
 
         existente.setEquipo(equipo);
-        existente.setFecha(request.fecha());
-        existente.setTipo(request.tipo());
-        existente.setDescripcion(request.descripcion());
-        existente.setHorasAlMantenimiento(request.horasAlMantenimiento());
 
         MantenimientoEntity actualizado = mantenimientoJpaRepository.save(existente);
         return mantenimientoMapper.toResponse(actualizado);
